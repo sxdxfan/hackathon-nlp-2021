@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Антикоррупционная экспертиза нормативно-правовых актов</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+  <div align="center">
+    <header class="header">
+      <div class="header_wrapper">
+        <div class="header_logo">
+          <a href="/" class="header_link">
+            <img class="header_img" src="static/logo.svg" align=left>
+          </a>
+        </div>
+      </div>
+    </header>
+    <br>
+    <h1>Антикоррупционная экспертиза нормативно-правовых актов</h1>
+    <div>
+        <p>
+            Загрузите документ нормативно-правового акта в формате DOCX или DOC для его анализа на предмет содержания возможных коррупциногенных факторов.
+        </p>
+    </div>
+    <form method="POST" action="" enctype="multipart/form-data">
+      <p>
+        <div class="custom-file-upload">
+          <div class="form-group">
+            <label class="label">
+              <i class="material-icons">attach_file</i>
+              <span class="title">Добавить файл</span>
+              <input type="file" name="file">
+            </label>
+          </div>
+        </div>
+      </p>
+      <p><input type="submit" value="Анализировать"></p>
+    </form>
+    <hr>
+    {% if corrupt_texts %}
+      <table border=1>
+        <tr>
+            <td valign="top"><b>Тип фактора</b></td>
+            <td valign="top"><b>Текст</b></td>
+        </tr>
+        {% for class, texts in corrupt_texts %}
+        <tr>
+          <td valign="top">{{class}}</td>
+          <td valign="top">
+          {% for text in texts %}
+            {{text[0]}}
+            <mark>{{text[1]}}</mark>
+            {{text[2]}}
+            <br>
+            <br>
+          {% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+  </body>
+</html>
