@@ -7,11 +7,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    runtime: nvidia
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
     image: hackathon:latest
     volumes:
       - .:/hackathon
-    command: bash -c "gunicorn --access-logfile - -w 1 --bind 0.0.0.0:5001 app:app --timeout 15000"
+    command: bash -c "gunicorn --access-logfile - -w 1 --bind 0.0.0.0:5000 app:app --timeout 15000"
     network_mode: host
